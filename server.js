@@ -14,14 +14,13 @@ app.use(express.json());
 connectDB();
 
 // ROUTES
-// I.N.D.U.C.E.S.
+// I.N.D.U.C.E.S. - Use express.Router() to create a new router instance.
+
 // Index: GET /books - Retrieve a list of all books.
-// New: GET /books/new - Display a form for creating a new book.
-// Delete: DELETE /books/:id - Delete a specific book by ID.
-// Update: PUT /books/:id - Update a specific book by ID.
-// Create: POST /books - Create a new book.
-// Edit: GET /books/:id/edit - Display a form for editing a specific book by ID.
-// Show: GET /books/:id - Retrieve a specific book by ID.
+app.get('/books', (req, res) => {
+  // Logic to retrieve all books from the database
+  res.send('Retrieve a list of all books');
+});
 
 // PORT: START THE SERVER
 app.listen(PORT, () => {
