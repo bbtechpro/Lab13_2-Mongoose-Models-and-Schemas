@@ -15,4 +15,9 @@ app.post('/books', (req, res) => {
   res.send('Create a new book');
 });
 
+// Delete: DELETE /:id - Deletes a book by its _id.
+app.delete('/books/:id', (req, res) => {
+  // Logic to delete a book by its _id from the database
+  res.send('Delete a book by its _id');
+});
 module.exports = router;
