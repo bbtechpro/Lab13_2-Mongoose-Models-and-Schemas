@@ -1,4 +1,5 @@
 const router = express.Router();
+const Book = require('../models/book');
 
 // ROUTES
 // I.N.D.U.C.E.S. - Use express.Router() to create a new router instance.
@@ -26,5 +27,19 @@ app.put('/books/:id', (req, res) => {
   // Logic to update a book by its _id in the database
   res.send('Update a book by its _id');
 });
+
+// C (Create): POST / - Creates a new book using the data in req.body. new Model().save()
+const newBook = new Book({
+});
+ 
+// The save method returns a promise that resolves with the saved document
+newBook.save()
+  .then(savedBook => {
+    console.log('Book saved successfully:', savedBook);
+  })
+  .catch(err => {
+    console.error('Error saving book:', err);
+  });
+
 
 module.exports = router;
