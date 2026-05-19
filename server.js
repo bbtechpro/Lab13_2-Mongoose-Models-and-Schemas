@@ -1,21 +1,26 @@
-// In server.js, require and execute your database connection.
-//DEPENDENCIES
+// DEPENDENCIES
 const express = require('express');
 const connectDB = require('./db/connection');
+const mongoose = require('mongoose');
 require('dotenv').config();
-
 const app = express();
 const PORT = process.env.PORT || 1738;
 
 // MIDDLEWARE
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
+// DATABASE
 connectDB();
+
+const db = mongoose.connection
+db.on('error', (err) => console.log(err.message + ' is mongo not running?'));
+db.on('connected', () => console.log('mongo connected'));
+db.on('disconnected', () => console.log('mongo disconnected'));
 
 // ROUTES
 
-// Mount your book router at a base path, like /api/books.
+// Mount book router at a base path, like /api/books.
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
