@@ -55,9 +55,82 @@ Start the server on a specified port.
 Submission Instructions
 Ensure your application runs without errors using node server.js.
 Test all five of your API endpoints using an API client like Postman or Insomnia. Verify that each one performs the correct CRUD operation.
-Submit a link to a GitHub repository containing your complete project. Do not include your .env file or the node_modules directory.
 
-Reflection Questions
+- Tested the API endpoints from localhost:3000 and Postman:
+
+✅ Create: POST http://localhost:3000/api/books
+✅ Get All: GET http://localhost:3000/api/books
+✅ Get One: GET http://localhost:3000/api/books/:id
+✅ Update: PUT http://localhost:3000/api/books/:id
+✅ Delete: DELETE http://localhost:3000/api/books/:id
+
+
+
+Reflection Questions:
+
 Why is it beneficial to separate your routes, models, and database connection into different directories?
+
+- The benefits of MVC (Model-View-Controller) is that it is a design pattern used in Node.js applications to organize code in a clean and structured way. It separates the application into three parts so that the code is easy to manage, understand, and scale.
+1. Model: Model is used to manage data and database logic. It defines how data is stored and accessed.
+
+Model is responsible for:
+
+Database connection
+Schema / structure
+Data validation
+Queries
+2. View: View is used to show UI (User Interface) to the user. It displays the data received from the controller.
+
+View is responsible for:
+
+HTML pages
+Templates
+Frontend display
+3. Controller: Controller is the main logic handler. It connects Model and View.
+
+Controller is responsible for:
+
+Handling requests
+Calling model
+Sending data to view
+Business logic
+
 What is the difference between PUT and PATCH HTTP methods, and which one does your PUT /:id endpoint more closely resemble?
+
+- PUT vs PATCH
+PUT is generally used for a full replacement of a resource. The client sends the complete updated representation, and the server replaces the existing resource with that payload.
+PATCH is used for partial updates. The client sends only the fields that should change, and the server updates those fields while leaving the rest intact.
+Which one does my PUT /:id resemble?
+My PUT /:id endpoint in bookRoutes.js more closely resembles PATCH.
+
+It uses Book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+That means it updates only the fields present in req.body
+It does not require a full book object to be sent
+So although the route is named PUT, its behavior is partial-update style, which is conceptually closer to PATCH.
+
 In the DELETE route, what is a good practice for the response you send back to the client after a successful deletion? Should you send the deleted object, a simple success message, or something else? Why?
+
+- Good practice for DELETE responses
+A good practice is to return a clear success response with the right status code.
+For a successful deletion, the most RESTful options are:
+204 No Content if you do not need to return any data
+200 OK with a concise message or deleted resource info if the client needs confirmation
+What to send
+204 No Content
+Best when the client only needs to know the delete succeeded
+Keeps the response lightweight
+200 OK with a body
+Good if you want to confirm what was deleted
+Useful for UI updates or audit/logging
+Example: { message: "Book deleted successfully" }
+Or include the deleted object: { message: "...", book: deletedBook }
+Why
+Simple success message is fine if the client only needs confirmation.
+Returning the deleted object is helpful when the client may need the deleted record for display or undo logic.
+Using 204 avoids unnecessary payload when no extra data is needed.
+In your current route
+My current DELETE route in bookRoutes.js returns:
+
+200 status
+{ message: 'Book deleted successfully', book: deletedBook }
+That is a reasonable choice because it confirms success and gives the client the deleted object.
