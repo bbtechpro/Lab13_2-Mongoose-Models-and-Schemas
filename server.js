@@ -14,13 +14,10 @@ app.use(express.json());
 connectDB();
 
 // ROUTES
-// I.N.D.U.C.E.S. - Use express.Router() to create a new router instance.
 
-// Index: GET /books - Retrieve a list of all books.
-app.get('/books', (req, res) => {
-  // Logic to retrieve all books from the database
-  res.send('Retrieve a list of all books');
-});
+// Mount your book router at a base path, like /api/books.
+const bookRoutes = require('./routes/bookRoutes');
+app.use('/api/books', bookRoutes);
 
 // PORT: START THE SERVER
 app.listen(PORT, () => {
