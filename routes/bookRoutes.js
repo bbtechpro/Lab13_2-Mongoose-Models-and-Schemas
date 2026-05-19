@@ -41,5 +41,11 @@ newBook.save()
     console.error('Error saving book:', err);
   });
 
+// E (Edit): GET /:id/edit - Retrieves a book by its _id and renders an edit form.
+app.get('/books/:id/edit', (req, res) => {
+  // Logic to retrieve a book by its _id and render an edit form
+  res.send('Retrieve a book by its _id and render an edit form');
+});
+
 
 module.exports = router;
