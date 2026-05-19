@@ -59,4 +59,17 @@ app.get('/books/:id', (req, res) => {
   res.send('Retrieve a single book by its _id');
 });
 
+// Use async/await and try...catch blocks in all routes to handle errors.
+app.post('/books', async (req, res) => {
+  try {
+    const newBook = new Book(req.body);
+    const savedBook = await newBook.save();
+    res.status(201).json(savedBook);
+  } catch (err) {
+    console.error('Error saving book:', err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
 module.exports = router;
