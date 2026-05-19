@@ -53,6 +53,10 @@ app.get('/books', (req, res) => {
   res.send('Retrieve a list of all books');
 });
 
-
+// Read One: GET /:id - Retrieves a single book by its _id.
+app.get('/books/:id', (req, res) => {
+  // Logic to retrieve a single book by its _id from the database
+  res.send('Retrieve a single book by its _id');
+});
 
 module.exports = router;
