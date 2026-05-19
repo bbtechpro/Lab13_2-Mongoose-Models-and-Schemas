@@ -47,5 +47,12 @@ app.get('/books/:id/edit', (req, res) => {
   res.send('Retrieve a book by its _id and render an edit form');
 });
 
+// S (Show): Read All: GET / - Retrieves all books from the database.
+app.get('/books', (req, res) => {
+  // Logic to retrieve all books from the database
+  res.send('Retrieve a list of all books');
+});
+
+
 
 module.exports = router;
