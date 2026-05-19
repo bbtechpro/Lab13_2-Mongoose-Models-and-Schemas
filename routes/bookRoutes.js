@@ -20,4 +20,11 @@ app.delete('/books/:id', (req, res) => {
   // Logic to delete a book by its _id from the database
   res.send('Delete a book by its _id');
 });
+
+// Update: PUT /:id - Updates a book by its _id using the data in req.body.
+app.put('/books/:id', (req, res) => {
+  // Logic to update a book by its _id in the database
+  res.send('Update a book by its _id');
+});
+
 module.exports = router;
