@@ -103,7 +103,7 @@ PATCH is used for partial updates. The client sends only the fields that should 
 Which one does my PUT /:id resemble?
 My PUT /:id endpoint in bookRoutes.js more closely resembles PATCH.
 
-It uses Book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+It uses Book.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after', runValidators: true })
 That means it updates only the fields present in req.body
 It does not require a full book object to be sent
 So although the route is named PUT, its behavior is partial-update style, which is conceptually closer to PATCH.
